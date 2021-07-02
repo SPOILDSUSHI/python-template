@@ -32,18 +32,17 @@ repos:
         entry: flake8
         language: python
         types: [python]
-        # add coverage
-    # -   id: coverage
-    #     name: Coverage
-    #     description: Calculate unittest coverage of code.
-    #     entry: coverage run --source=application -m unittest discover
-    #     language: python
-    #     types: [python]
-    #     pass_filenames: false
-    # -   id: coverage
-    #     name: Coverage
-    #     description: Calculate unittest coverage of code.
-    #     entry: coverage-badge -f -o assets/coverage.svg
-    #     language: python
-    #     types: [python]
-    #     pass_filenames: false
+    -   id: coverage
+        name: Coverage
+        description: Calculate pytest coverage of code.
+        entry: coverage run -m pytest
+        language: python
+        types: [python]
+        pass_filenames: false
+    -   id: coverage-badge
+        name: Coverage Badge
+        description: Calculate pytest coverage of code.
+        entry: coverage-badge -f -o assets/coverage.svg
+        language: python
+        types: [python]
+        pass_filenames: false
