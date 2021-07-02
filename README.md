@@ -1,7 +1,7 @@
 # Template for python repo
 
 <p align="center">
-    <a href=".assets/coverage.svg" alt="Coverage">
+    <a href="./assets/coverage.svg" alt="Coverage">
         <img src="./assets/coverage.svg"/>
     </a>
 </p>
