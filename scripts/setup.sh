@@ -4,6 +4,10 @@
 
 export POETRY_VIRTUALENVS_IN_PROJECT=true
 
+#ssh key add to zshrc
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519-github
+
 # add this to zshrc
 export PATH="$HOME/.local/bin:$PATH"
 
