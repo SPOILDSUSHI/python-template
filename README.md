@@ -12,13 +12,9 @@ Subtitle
 
 ### 1. Fork the repo
 
-### 2. Create the venv with the requirements
+### 2. Install user level dependencies
 
-`python -m venv env`
-
-`source env/bin/activate`
-
-`pip install -r requirements.txt`
+`pip install nox pre-commit`
 
 ### 3. Set up pre-commit
 
@@ -26,4 +22,7 @@ Subtitle
 
 ### 4. Write great code with great tests!
 
-### 5. Pass all of the pre-commit hooks
+### 5. Use Nox for testing
+
+`nox`
+`nox -rs tests`

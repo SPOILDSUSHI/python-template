@@ -1,0 +1,57 @@
+repos:
+-   repo: local
+    hooks:
+    -   id: trailing-whitespace
+        name: Trim Trailing Whitespace
+        description: This hook trims trailing whitespace.
+        entry: poetry run trailing-whitespace-fixer
+        language: system
+        types: [text]
+    -   id: end-of-file-fixer
+        name: Fix End of Files
+        description: Ensures that a file is either empty, or ends with one newline.
+        entry: poetry run end-of-file-fixer
+        language: system
+        types: [text]
+    -   id: isort
+        name: iSort
+        description: Sort imports.
+        entry: poetry run isort
+        args: ["--profile", "black", "--filter-files"]
+        language: system
+        types: [python]
+    -   id: black
+        name: Black
+        description: Black is the uncompromising Python code formatter.
+        entry: poetry run black
+        language: system
+        types: [python]
+    -   id: flake8
+        name: Flake8
+        description: Flake8 ensures our code follows the standards as defined in PEP8.
+        entry: poetry run flake8
+        language: system
+        types: [python]
+    -   id: bandit
+        name: Bandit
+        description: Flake8 ensures our code follows the standards as defined in PEP8.
+        entry: poetry run bandit
+        language: system
+        types: [python]
+        require_serial: true
+        args: ["-c", "bandit.yml"]
+
+    # -   id: coverage
+    #     name: Coverage
+    #     description: Calculate pytest coverage of code.
+    #     entry: coverage run -m pytest
+    #     language: system
+    #     types: [python]
+    #     pass_filenames: false
+    # -   id: coverage-badge
+    #     name: Coverage Badge
+    #     description: Calculate pytest coverage of code.
+    #     entry: coverage-badge -f -o assets/coverage.svg
+    #     language: system
+    #     types: [python]
+    #     pass_filenames: false
