@@ -4,6 +4,7 @@ from uuid import uuid4
 from sqlmodel import Field, SQLModel
 from typing_extensions import Annotated
 
+
 # Shared token properties
 class TokenBase(SQLModel):
     endpoint_name: str = Field(unique=True, index=True)
@@ -32,6 +33,7 @@ class TokenCreate(TokenBase):
 class TokenRead(TokenBase):
     id: int
 
+
 # shared state properties
 class StateBase(SQLModel):
     state: Annotated[str, Field(default_factory=lambda: str(uuid4()), index=True)]
@@ -52,4 +54,3 @@ class StateRead(StateBase):
 
 class StateCreate(StateBase):
     pass
-

@@ -1,16 +1,12 @@
-import os
 from collections.abc import Generator
 
 import pytest
-
 from fastapi.testclient import TestClient
-
 from sqlmodel import Session, SQLModel, create_engine, delete
 from sqlmodel.pool import StaticPool
 
 from app.main import app, get_db
 from app.models import State, Token
-
 
 connect_args = {"check_same_thread": False}
 test_sqlalchemy_database_uri = "sqlite://"

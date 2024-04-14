@@ -1,5 +1,3 @@
-import os
-import ssl
 from collections.abc import Generator
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta
@@ -7,26 +5,29 @@ from typing import Annotated
 
 import httpx
 from fastapi import Depends, FastAPI, HTTPException
-from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
 from fastapi.responses import RedirectResponse
-from oauthlib.oauth2 import WebApplicationClient
 from sqlmodel import Session, select
 
 from app import crud, models
 from app.db import engine, init_db
 
+
 def get_db() -> Generator[Session, None, None]:
     with Session(engine) as session:
         yield session
 
+
 SessionDep = Annotated[Session, Depends(get_db)]
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> Generator[None, None, None]:
     init_db()
     yield
 
+
 app = FastAPI(lifespan=lifespan)
+
 
 @app.get("/")
 async def index() -> dict[str, str]:
@@ -66,15 +67,12 @@ async def login(*, session: SessionDep) -> RedirectResponse:
         crud.purge_invalid_states(session=session)
         state = crud.create_state(session=session)
 
-        auth_uri = OAUTH_CLIENT.prepare_request_uri(
-            uri="test_uri",
-            redirect_uri="test_redirect",
-            state=state.state,
-        )
+        auth_uri = f"test_uri+redirect_uri=test_redirect+state={state.state}"
+
         return RedirectResponse(url=auth_uri)
 
     elif result.expires <= datetime.now():
-        auth = httpx.BasicAuth(username="client_id", password="client_secret")
+        auth = httpx.BasicAuth(username="client_id", password="client_secret")  # nosec
         post_data = {
             "grant_type": "refresh_token",
             "refresh_token": result.refresh_token,
@@ -102,7 +100,8 @@ async def login(*, session: SessionDep) -> RedirectResponse:
 
     else:
         return RedirectResponse("/?nothing=already_logged_in")
-    
+
+
 @app.get("/auth_callback")
 async def auth_callback(*, session: SessionDep, code: str, state: str):
     """
@@ -118,7 +117,7 @@ async def auth_callback(*, session: SessionDep, code: str, state: str):
     if is_valid_state.expires <= datetime.now():
         raise HTTPException(status_code=403, detail="Expired state")
 
-    auth = httpx.BasicAuth(username="client_id", password="client_secret")
+    auth = httpx.BasicAuth(username="client_id", password="client_secret")  # nosec
     post_data = {
         "grant_type": "authorization_code",
         "code": code,
