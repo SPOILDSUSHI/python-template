@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.11"
 fastapi = "^0.110.1"
 sqlmodel = "^0.0.16"
+uvicorn = "^0.29.0"
 
 
 [tool.poetry.group.dev.dependencies]

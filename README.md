@@ -22,6 +22,8 @@ Subtitle
 
 ### 4. Write great code with great tests!
 
+`poetry run uvicorn src.app.main:app --reload --port=8080`
+
 ### 5. Use Nox for testing
 
 `nox`
