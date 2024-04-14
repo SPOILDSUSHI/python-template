@@ -57,7 +57,6 @@ async def login(*, session: SessionDep) -> RedirectResponse:
 
     Todo:
         *make dynamic to accept different downstream logins
-        *remove the schwab hardcode
     """
 
     statement = select(models.Token).where(models.Token.endpoint_name == "test")
