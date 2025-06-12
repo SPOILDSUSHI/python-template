@@ -20,9 +20,9 @@ Subtitle
 
 `./bootstrap_setup.sh`
 
-### 2. Install user level dependencies
+### 2. Setup a new Repo
 
-`pip install nox pre-commit`
+`uv init --lib`
 
 ### 3. Set up pre-commit
 

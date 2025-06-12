@@ -8,6 +8,8 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 cp -f .zshrc ~/.zshrc
 
+source $HOME/.local/bin/env
+
 uv python install 3.12
 
 uv tool install pre-commit
