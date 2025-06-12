@@ -10,7 +10,15 @@ Subtitle
 
 # How to use this
 
-### 1. Fork the repo
+### 1. Clean Fedora install
+1. Install git and zsh
+2. Install oh-my-zsh
+3. Install uv
+4. Replace .zshrc file with pre-configured options
+5. Install Python 3.12
+6. Install pre-commit
+
+`./bootstrap_setup.sh`
 
 ### 2. Install user level dependencies
 
